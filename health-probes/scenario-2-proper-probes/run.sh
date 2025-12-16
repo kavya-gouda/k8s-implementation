@@ -5,11 +5,8 @@ echo "🚀 Building good-health-app..."
 docker build -t good-health-app:v1 .
 
 echo "📦 Loading image into cluster..."
-if command -v minikube &> /dev/null; then
-    minikube image load good-health-app:v1
-else
-    docker save good-health-app:v1 | sudo k3s ctr images import -
-fi
+minikube image load good-health-app:v1
+
 
 echo "🎯 Deploying application..."
 kubectl apply -f deployment.yaml
